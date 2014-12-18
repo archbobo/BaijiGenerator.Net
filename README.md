@@ -29,7 +29,8 @@ Below is the main UI of the IDL editor and code generator.
 ## Version History
 
 ### 1.2.0.0 - 2014.12
-  * Initial release supporting Java/C#/iOS/Android/WinPhone code generation.
+  * Initial release supporting Java/C#/iOS/Android/WinPhone code generation, binary download [here](https://github.com/baijioss/BaijiGenerator.Net/releases/download/v1.2.0.0/BaijiEditor_v1.2.0.0.rar)
+  * 
 
 
 ##Copyright and License
