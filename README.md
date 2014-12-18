@@ -14,7 +14,8 @@ Baiji is inspired by Apache Thrift and Avro.
 
 
 ## How to Use
-
+Below is the main UI of the IDL editor and code generator.
+![Generator UI](https://raw.githubusercontent.com/baijioss/BaijiGenerator.Net/master/Doc/GeneratorUI.png)
 
 ## The Architecture
 
