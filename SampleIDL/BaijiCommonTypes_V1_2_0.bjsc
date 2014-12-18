@@ -106,9 +106,6 @@ enum SeverityCodeType {
     Warning
 }
 
-/* (out) The request was processed successfully, but something occurred that may affect your application or the user.
-For example, Baiji service may have changed a value the user sent in.
-In this case, Baiji service returns a normal, successful response and also returns the warning. */
 enum ErrorClassificationCodeType {
     /* Indicates that an error has occurred in the service implementation,
     such as business logic error or other backend error. */
