@@ -16,7 +16,12 @@ Baiji is inspired by Apache Thrift and Avro.
 ## How to Use
 
 
-## The Design
+## The Architecture
+
+### Code Generation Architecture
+![Code Generation Architecutre](https://raw.githubusercontent.com/baijioss/BaijiGenerator.Net/master/Doc/Codegen_Arch.png)
+
+
 
 ## Version History
 
