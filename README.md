@@ -7,7 +7,7 @@ Baiji is inspired by Apache Thrift and Avro.
 
 
 ## HighLight
-* Thrift Like IDL driven development, editor for visual IDL editing, feature including sytax highlighing, keyword hinting, syntax error hinting.
+* Thrift Like IDL driven development, editor for visual IDL editing, feature including sytax highlighting, keyword hinting, syntax error hinting.
 * Java/C# client and mobile(iOS/Android/WinPhone) client auto-generation via code generator tool
 * Code Generated supporting Baiji serialization(JSON/binary)
 * Auto-generate code comments from IDL annotation.
@@ -22,7 +22,7 @@ Below is the main UI of the IDL editor and code generator.
 ### Code Generation Architecture
 ![Code Generation Architecutre](https://raw.githubusercontent.com/baijioss/BaijiGenerator.Net/master/Doc/Codegen_Arch.png)
 
-### Scheam Driven Workflow
+### Schema Driven Workflow
 ![Scheam Driven Workflow](https://raw.githubusercontent.com/baijioss/BaijiGenerator.Net/master/Doc/Schema_Driven.png)
 
 ## Docs
