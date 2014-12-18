@@ -21,6 +21,8 @@ Baiji is inspired by Apache Thrift and Avro.
 ### Code Generation Architecture
 ![Code Generation Architecutre](https://raw.githubusercontent.com/baijioss/BaijiGenerator.Net/master/Doc/Codegen_Arch.png)
 
+### Scheam Driven Workflow
+![Scheam Driven Workflow](https://raw.githubusercontent.com/baijioss/BaijiGenerator.Net/master/Doc/Schema_Driven.png)
 
 
 ## Version History
