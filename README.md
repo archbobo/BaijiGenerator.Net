@@ -25,6 +25,10 @@ Below is the main UI of the IDL editor and code generator.
 ### Scheam Driven Workflow
 ![Scheam Driven Workflow](https://raw.githubusercontent.com/baijioss/BaijiGenerator.Net/master/Doc/Schema_Driven.png)
 
+## Docs
+  * [Baiji Scheam/IDL](https://github.com/baijioss/BaijiGenerator.Net/wiki/Baiji-IDL)
+  * [Baiji Types](https://github.com/baijioss/BaijiGenerator.Net/wiki/Baiji-Types)
+  * 
 
 ## Version History
 
