@@ -1,0 +1,216 @@
+namespace java com.ctriposs.baiji.rpc.common.types
+namespace csharp CTripOSS.Baiji.Rpc.Common.Types
+namespace objc BJ
+
+/* Common type definition of the request payload, concrete request types may choose to include
+   this common type for optional versioning and output selecting requirements. The recommended
+   naming convention we use for the concrete type names is the name of the service (the verb or call name)
+   followed by "RequestType": VerbNameRequestType */
+class CommonRequestType {
+    /* The version number of the API code that you are programming against (e.g., 1.2.0).
+       If not set, defaults to latest version. Whether and how this field is leveraged depends on specific service. */
+    string version;
+    /* You can use the OutputSelector field to restrict the data returned by this call.
+    When you make a call such as GetItem that retrieves data from baiji service,
+    the OutputSelector field is useful for restricting the data returned.
+    This field makes the call response easier to use, especially when a large payload would be returned.
+    If you use the OutputSelector field, the output data will include only the fields you specified in the request.
+    For example, if you are using GetItem and you want the item data in the response to be restricted to
+    the ViewItemURL (the URL where a user can view the listing) and BookItNowPrice,
+    then within the GetItem request, specify those output fields.
+    The output selecting logic is handled uniformly at SOA framework level. */
+    list<string> outputSelector;
+}
+
+/* Response status type definition of a response payload.
+   Per Baiji SOA policy, all concrete response types must include this response status type
+   as a root element with element name 'ResponseStatus'.
+   This is required for unified response status/error handling at framework level.
+   The recommended naming convention we use for the concrete type names is the name of
+   the service (the verb or call name) followed by "ResponseType": VerbNameResponseType */
+class ResponseStatusType {
+    /* This value represents the date and time when a Baiji service processed the request.
+    The value of this element is set by framework automatically, value set by service implementation will be overwritten. */
+    required datetime timestamp;
+    /* Indicates whether the call was successfully processed by Baiji. */
+    required AckCodeType ack;
+    /* A list of framework, validation or service-level errors or warnings (if any)
+    that were raised when a Baiji service processed the request.
+    Only returned if there were warnings or errors. */
+    list<ErrorDataType> errors
+    /* This refers to the particular software build that Baiji service used
+    when processing the request and generating the response.
+    This includes the version number plus additional information. */
+    string build;
+    /* The version of service used to process the request. */
+    string version;
+    /* Reserved for future extension. */
+    list<ExtensionType> extension;
+}
+
+/* AckCodeType - Type declaration to be used by other schema.
+This code identifies the acknowledgement code types that Baiji could use to
+communicate the status of processing a (request) message to a client.
+This code would be used as part of a response message that contains a framework,
+validation or service-level acknowledgement element. */
+enum AckCodeType {
+    /* (out) Request processing succeeded */
+    Success,
+    /* (out) Request processing failed */
+    Failure,
+    /* (out) Request processing completed with warning information being included in the response message */
+    Warning,
+    /* (out) Request processing completed with warning information being included in the response message */
+    PartialFailure
+}
+
+/* This is service, validation or framework-level error.*/
+class ErrorDataType {
+    /* A brief description of the condition that raised the error. */
+    string message;
+    /* A unique code that identifies the particular error condition that occurred. */
+    string errorCode;
+    /* StackTrace of exception causing this error, only used in debug mode. */
+    string stackTrace;
+    /* Indicates whether the reported problem is fatal (an error) or is less- severe (a warning). Review the error message details for information on the cause. */
+    SeverityCodeType severityCode;
+    /* Some warning and error messages return one or more variables that contain contextual information about the error. This is often the field or value that triggered the error. */
+    list<ErrorFieldType> errorFields;
+    /* API errors are divided between three classes: service errors, validation errors and framework errors. */
+    ErrorClassificationCodeType errorClassification;
+}
+
+/* A variable that contains specific information about the context of this error.
+For example, in request validation failure case, the problematic field name might be returned as an error field.
+Use error fields to flag fields that users need to correct.
+Also use error fields to distinguish between errors when multiple errors are returned. */
+class ErrorFieldType {
+    /* The name of the field caused the error. */
+    string fieldName;
+    /* Error code */
+    string errorCode;
+    /* Error message */
+    string message;
+}
+
+/* SeverityCodeType - Type declaration to be used by other schema.
+This code identifies the severity of an API error.
+A code indicates whether there is an API- level error or warning that needs to be communicated to the client. */
+enum SeverityCodeType {
+    /* (out) The request that triggered the error was not processed successfully.
+    When a serious framework, validation or service-level error occurs, the error is returned instead of the business data. */
+    Error,
+    /* (out) The request was processed successfully, but something occurred that may affect your application or the user.
+    For example, Baiji service may have changed a value the user sent in.
+    In this case, Baiji service returns a normal, successful response and also returns the warning. */
+    Warning
+}
+
+/* (out) The request was processed successfully, but something occurred that may affect your application or the user.
+For example, Baiji service may have changed a value the user sent in.
+In this case, Baiji service returns a normal, successful response and also returns the warning. */
+enum ErrorClassificationCodeType {
+    /* Indicates that an error has occurred in the service implementation,
+    such as business logic error or other backend error. */
+    ServiceError,
+    /* Indicates that an error has occurred because of framework-level request validation failure.
+    This is usually because client consumer has attempted to submit invalid data (or missing data)
+    in the request when making API call. */
+    ValidationError,
+    /* Indicates that an error has occurred in the Baiji soa framework (Baiji RPC),
+    such as a serialization/deserialization failure. */
+    FrameworkError,
+    /* Indicates that a Baiji service is unable to meet a specified service level agreement.
+    Typical cases that will cause this error including:
+    1) continues high service call latency;
+    2) continues high service call error rate.
+    In these cases, to avoid further service deterioration, the service framework will enter into a self-protecting mode,
+    by tripping the service call circuit and return SLAError to clients.
+    Later, when the situation improves, the service framework will close the service call circuit again and continue to serve the clients. */
+    SLAError,
+    /* Indicates that a request failed to pass the service security check. */
+    SecurityError,
+}
+
+/* Reserved for future use. */
+class ExtensionType {
+    /* Reserved for future use. */
+    int id;
+    /* Reserved for future use. */
+    string version;
+    /* Reserved for future use. */
+    string contentType;
+    /* Reserved for future use. */
+    string value;
+}
+
+/* Controls the pagination of the result set.
+Child elements specify the maximum number of items to return per call and which page of data to return.
+Controls which items are returned in the response, but does not control the details associated with the returned items. */
+class PaginationInputType {
+    /* Specifies which subset of data (or "page") to return in the call response.
+    The number of data pages is determined by the total number of items matching
+    the request search criteria (returned in paginationOutput.totalEntries)
+    divided by the number of entries to display in each response (entriesPerPage).
+    You can return max number of pages of the result set by issuing multiple requests
+    and specifying, in sequence, the pages to return.
+    Specify a positive value equal to or lower than the number of pages available
+    (which you determine by examining the results of your initial request). */
+    int pageNumber;
+    /* Specifies the maximum number of entries to return in a single call.
+    If the number of entries found on the specified pageNumber is less than the value specified here,
+    the number of items returned will be less than the value of entriesPerPage. This indicates the end of the result set. */
+    int entriesPerPage;
+}
+
+/* Shows the pagination data for the item search.
+Child elements include the page number returned, the maximum entries returned per page,
+the total number of pages that can be returned, and the total number of items that match the search criteria. */
+class PaginationOutputType {
+    /* The subset of item data returned in the current response.
+    Search results are divided into sets, or "pages," of item data.
+    The number of pages is equal to the total number of items matching the search criteria
+    divided by the value specified for entriesPerPage in the request.
+    The response for a request contains one "page" of item data.
+    This returned value indicates the page number of item data returned (a subset of the complete result set).
+    If this field contains 1, the response contains the first page of item data (the default).
+    If the value returned in totalEntries is less than the value for entriesPerPage,
+    pageNumber returns 1 and the response contains the entire result set.
+    The value of pageNumber is normally equal to the value input for paginationInput.pageNumber.
+    However, if the number input for pageNumber is greater than the total possible pages of output,
+    Baiji returns the last page of item data in the result set, and the value for pageNumber is set to
+    the respective (last) page number. */
+    int pageNumber;
+    /* The maximum number of items that can be returned in the response.
+    This number is always equal to the value input for paginationInput.entriesPerPage.
+    The end of the result set has been reached if the number specified for entriesPerPage is greater than
+    the number of items found on the specified pageNumber.
+    In this case, there will be fewer items returned than the number specified in entriesPerPage.
+    This can be determined by comparing the entriesPerPage value with the value returned
+    in the count attribute for the searchResult field. */
+    int entriesPerPage;
+    /* The total number of pages of data that could be returned by repeated search requests.
+    Note that if you modify the value of inputPagination.entriesPerPage in a request,
+    the value output for totalPages will change.
+    A value of "0" is returned if service does not find any items that match the search criteria. */
+    int totalPages;
+    /* The total number of items found that match the search criteria in your request.
+    Depending on the input value for entriesPerPage, the response might include only a portion (a page) of the entire result set.
+    A value of "0" is returned if service does not find any items that match the search criteria. */
+    int totalEntries;
+}
+
+/* The health status of the service. Per Baiji SOA policy, CheckHealth API must be implemented by service implementation. */
+class CheckHealthResponseType {
+    ResponseStatusType responseStatus;
+}
+
+/* Check the health status of the service. Per Baiji SOA policy, CheckHealth API must be implemented by service implementation. */
+class CheckHealthRequestType {
+}
+
+/* Generic error response container. Only used by Baiji RPC framework internally.
+Please don't use this type in your service implementation. */
+class GenericErrorResponseType {
+    ResponseStatusType responseStatus;
+}

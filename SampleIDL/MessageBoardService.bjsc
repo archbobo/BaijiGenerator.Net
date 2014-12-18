@@ -1,0 +1,37 @@
+include 'BaijiCommonTypes_V1_2_0.bjsc'
+
+namespace java com.ctriposs.baiji.rpc.samples.message
+namespace csharp CTripOSS.Baiji.Rpc.Samples.Message
+namespace objc MBS
+
+class Message {
+    string content;
+    string author;
+    datetime createdTime;
+}
+
+class AddMessageRequestType {
+    Message message;
+}
+
+class AddMessageResponseType {
+    BaijiCommonTypes_V1_2_0.ResponseStatusType responseStatus;
+}
+
+class GetMessagesRequestType {
+}
+
+class GetMessagesResponseType {
+    BaijiCommonTypes_V1_2_0.ResponseStatusType responseStatus;
+    list<Message> messages;
+}
+
+@serviceName='MessageBoardService'
+@serviceNamespace='http://ctriposs.com/baiji/sample/messageboardservice/v1'
+service MessageBoardService {
+    AddMessageResponseType addMessage(AddMessageRequestType request);
+
+    GetMessagesResponseType getMessages(GetMessagesRequestType request);
+
+    BaijiCommonTypes_V1_2_0.CheckHealthResponseType checkHealth(BaijiCommonTypes_V1_2_0.CheckHealthRequestType request);
+}
