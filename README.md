@@ -16,6 +16,14 @@ Baiji is inspired by Apache Thrift and Avro.
 ## How to Use
 Below is the main UI of the IDL editor and code generator.
 ![Generator UI](https://raw.githubusercontent.com/baijioss/BaijiGenerator.Net/master/Doc/GeneratorUI.png)
+For usage guide, please refer to [this wiki](https://github.com/baijioss/BaijiGenerator.Net/wiki/BaijiGenerator-Usage)
+
+## Docs
+  * [Baiji Code Generator Usage](https://github.com/baijioss/BaijiGenerator.Net/wiki/BaijiGenerator-Usage)
+  * [Baiji IDL Definition](https://github.com/baijioss/BaijiGenerator.Net/wiki/Baiji-IDL-Definition)
+  * [Baiji Scheam/IDL Formal Syntax](https://github.com/baijioss/BaijiGenerator.Net/wiki/Baiji-IDL-Formal-Syntax)
+  * [Baiji Types](https://github.com/baijioss/BaijiGenerator.Net/wiki/Baiji-Types)
+  * 
 
 ## The Architecture
 
@@ -24,13 +32,6 @@ Below is the main UI of the IDL editor and code generator.
 
 ### Schema Driven Workflow
 ![Scheam Driven Workflow](https://raw.githubusercontent.com/baijioss/BaijiGenerator.Net/master/Doc/Schema_Driven.png)
-
-## Docs
-  * [Baiji Code Generator Usage](https://github.com/baijioss/BaijiGenerator.Net/wiki/BaijiGenerator-Usage)
-  * [Baiji IDL Definition](https://github.com/baijioss/BaijiGenerator.Net/wiki/Baiji-IDL-Definition)
-  * [Baiji Scheam/IDL Formal Syntax](https://github.com/baijioss/BaijiGenerator.Net/wiki/Baiji-IDL-Formal-Syntax)
-  * [Baiji Types](https://github.com/baijioss/BaijiGenerator.Net/wiki/Baiji-Types)
-  * 
 
 ## Version History
 
